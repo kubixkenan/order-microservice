@@ -1,0 +1,53 @@
+/auth/authentication/.vs
+/auth/authentication/bin
+/auth/authentication/obj
+/auth/authentication/obj
+/auth/authentication/*.gitignore
+
+/client/node_modules
+
+HELP.md
+/customer.api/target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+### STS ###
+/customer.api/.apt_generated
+/customer.api/.classpath
+/customer.api/.factorypath
+/customer.api/.project
+/customer.api/.settings
+/customer.api/.springBeans
+/customer.api/.sts4-cache
+
+### IntelliJ IDEA ###
+/customer.api/.idea
+/customer.api/*.iws
+/customer.api/*.iml
+/customer.api/*.ipr
+
+### NetBeans ###
+/customer.api/nbproject/private/
+/customer.api/nbbuild/
+/customer.api/dist/
+/customer.api/nbdist/
+/customer.api/.nb-gradle/
+/customer.api/build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### VS Code ###
+/customer.api/.vscode/
+
+/data
+
+/order.api/node_modules
+/order.api/.dockerignore
+/order.api/.gitignore
+
+/stock.api/StockApi/.vs
+/stock.api/StockApi/bin
+/stock.api/StockApi/obj
+/stock.api/StockApi/obj
+/stock.api/StockApi/*.gitignore

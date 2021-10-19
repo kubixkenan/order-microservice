@@ -1,0 +1,73 @@
+version: '3.4'
+
+services:
+    mongo:
+        container_name: mongo
+        image: mongo
+        volumes:
+            - ./data:/data/db
+        ports:
+            - '27017:27017'
+    orderapi:
+       container_name: orderapi
+       image: orderapi
+       restart: always
+       build:
+            context: .
+            dockerfile: order.api/Dockerfile
+       ports:
+         - "8092:3000"
+       links:
+         - mongo
+    stock.api:
+        ports:
+            - "8091:80"            
+        image: stock.api
+        build:
+            context: .
+            dockerfile: stock.api/StockApi/Dockerfile
+        container_name: stock.api
+    auth:
+        ports:
+            - "8090:80"            
+        image: auth
+        build:
+            context: .
+            dockerfile: auth/authentication/Dockerfile
+        container_name: auth
+    gateway:
+        ports:
+            - "8000:80"            
+        image: gateway
+        build:
+            context: .
+            dockerfile: gateway/gateway/Dockerfile
+        container_name: gateway            
+    customerapi:
+        container_name: customerapi
+        image: customerapi
+        restart: always
+        build:
+            context: .
+            dockerfile: customer.api/Dockerfile
+        ports:
+            - "8093:8080"
+        depends_on:
+            - pgdb
+        environment:
+            - SPRING_DATASOURCE_URL=jdbc:postgresql://pgdb:5432/customerapi
+            - SPRING_DATASOURCE_USERNAME=postgres
+            - SPRING_DATASOURCE_PASSWORD=123456
+            - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+    pgdb:
+        image: 'postgres:13.1-alpine'
+        container_name: pgdb
+        environment:
+            - POSTGRES_DB=customerapi
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=123456
+        ports:
+           - '5460:5432'
+networks:
+  local:
+    driver: host
